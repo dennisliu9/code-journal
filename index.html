@@ -27,19 +27,28 @@
           </div>
           <div class="row">
             <!-- row for image, title, photo url pieces-->
-            <img src="images/placeholder-image-square.jpg" alt="placeholder image">
-            <label for="entry-title">Title</label>
-            <input required id="entry-title" name="EntryTitle" type="text">
-            <label for="photo-url">Photo URL</label>
-            <input required id="photo-url" name="PhotoURL" type="text">
+            <div class="column-half">
+              <img src="images/placeholder-image-square.jpg" alt="placeholder image">
+            </div>
+            <div class="column-half">
+              <label for="entry-title">Title</label>
+              <input required id="entry-title" name="EntryTitle" type="text">
+              <label for="photo-url">Photo URL</label>
+              <input required id="photo-url" name="PhotoURL" type="text">
+            </div>
           </div>
           <div class="row">
             <!-- Row for notes -->
-            <label for="entry-notes">Notes</label>
-            <textarea id="entry-notes"></textarea>
+            <div class="column-full">
+              <label for="entry-notes">Notes</label>
+              <textarea required id="entry-notes"></textarea>
+            </div>
           </div>
           <div class="row">
-            <!-- Row for submit button -->
+            <!-- Row for Save Button -->
+            <div class="column-full submit-button">
+              <button>SAVE</button>
+            </div>
           </div>
         </form>
       </div>

@@ -18,6 +18,19 @@
   width: 100%;
 }
 
+div[data-view="entry-form"] label,
+div[data-view="entry-form"] input,
+div[data-view="entry-form"] textarea,
+div[data-view="entry-form"] img {
+  display: block;
+  width: 100%;
+}
+
+div.submit-button {
+  display: flex;
+  justify-content: flex-end;
+}
+
 @media screen and (min-width: 768px) {
   .container {
     max-width: 900px;
