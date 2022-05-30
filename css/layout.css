@@ -20,10 +20,13 @@
 
 div[data-view="entry-form"] label,
 div[data-view="entry-form"] input,
-div[data-view="entry-form"] textarea,
-div[data-view="entry-form"] img {
+div[data-view="entry-form"] textarea {
   display: block;
   width: 100%;
+}
+
+div[data-view="entry-form"] img {
+  max-width: 100%;
 }
 
 div.submit-button {

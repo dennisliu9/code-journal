@@ -16,7 +16,8 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header>
+  <header class="bg-purple text-white">
+    <h2>Code Journal</h2>
   </header>
   <main>
     <div class="container">
@@ -32,22 +33,22 @@
             </div>
             <div class="column-half">
               <label for="entry-title">Title</label>
-              <input required id="entry-title" name="EntryTitle" type="text">
+              <input required id="entry-title" name="EntryTitle" type="text" class="rounded-corners">
               <label for="photo-url">Photo URL</label>
-              <input required id="photo-url" name="PhotoURL" type="text">
+              <input required id="photo-url" name="PhotoURL" type="text" class="rounded-corners">
             </div>
           </div>
           <div class="row">
             <!-- Row for notes -->
             <div class="column-full">
               <label for="entry-notes">Notes</label>
-              <textarea required id="entry-notes"></textarea>
+              <textarea required id="entry-notes"></textarea class="rounded-corners">
             </div>
           </div>
           <div class="row">
             <!-- Row for Save Button -->
             <div class="column-full submit-button">
-              <button>SAVE</button>
+              <button class="bg-purple text-white rounded-corners no-border">SAVE</button>
             </div>
           </div>
         </form>

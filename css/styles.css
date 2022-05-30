@@ -1,0 +1,35 @@
+/*
+purple: #562b81
+light-grey background: #f0f0f0
+
+*/
+
+.bg-purple {
+  background-color: #562b81;
+}
+
+.text-white {
+  color: white;
+}
+
+.rounded-corners {
+  border-radius: 0.2rem;
+}
+
+.no-border {
+  border-style: none;
+}
+
+input,
+textarea {
+  border-style: solid;
+  border-color: lightgrey;
+}
+
+input:focus,
+textarea:focus {
+  border: #562b81 solid;
+
+  /* Remove black outline */
+  outline: none;
+}
