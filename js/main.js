@@ -1,3 +1,5 @@
+/* global data */
+
 var $form = document.querySelector('#entry-area');
 var $photo = document.querySelector('#input-img');
 var $photoURL = document.querySelector('#photo-url');

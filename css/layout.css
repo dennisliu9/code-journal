@@ -22,6 +22,14 @@
   justify-content: center;
 }
 
+.justify-between {
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}
+
 .flex-col {
   display: flex;
 }
@@ -53,6 +61,10 @@ img {
 div.button-to-right {
   display: flex;
   justify-content: flex-end;
+}
+
+ul > li {
+  margin: 1rem 0;
 }
 
 @media screen and (min-width: 768px) {
