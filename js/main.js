@@ -136,3 +136,6 @@ $entriesNav.addEventListener('click', function (event) {
 $newEntry.addEventListener('click', function (event) {
   hideAllBut($views, 'entry-form');
 });
+
+// Show the previous view
+hideAllBut($views, data.view);
