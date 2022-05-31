@@ -16,3 +16,14 @@ function persistFormData(event) {
   localStorage.setItem('code-journal-entry-data', JSON.stringify(data));
 }
 window.addEventListener('beforeunload', persistFormData);
+
+// test purposes
+// function resetData() {
+//   data = {
+//     view: 'entry-form',
+//     entries: [],
+//     editing: null,
+//     nextEntryId: 1
+//   };
+//   localStorage.clear();
+// }

@@ -106,6 +106,10 @@ Loop through array
 If dataViewToShow === 'entries', we will want to render the entries tree again
   Query for the ul element containing all of the entry list items (id entries-list)
   Clear out all children nodes
+  If data.entries is empty
+    Create a new p element object and set its textContent to "No entries have been recorded"
+    Apply styling classes
+    Append as child to the entries list
   Loop through data.entries and call renderEntry() on each
   Append the created DOM tree for each entry to the now cleared entries list
 Update the data object with the now current view
@@ -122,6 +126,12 @@ function hideAllBut(views, dataViewToShow) {
   if (dataViewToShow === 'entries') {
     var $entriesList = document.querySelector('#entries-list');
     $entriesList.replaceChildren();
+    if (data.entries.length === 0) {
+      var $blankEntriesText = document.createElement('p');
+      $blankEntriesText.textContent = 'No entries have been recorded.';
+      $blankEntriesText.className = 'body-font font-regular text-center';
+      $entriesList.appendChild($blankEntriesText);
+    }
     for (var entryIdx = 0; entryIdx < data.entries.length; entryIdx++) {
       var $entryTree = renderEntry(data.entries[entryIdx]);
       $entriesList.appendChild($entryTree);
@@ -137,5 +147,5 @@ $newEntry.addEventListener('click', function (event) {
   hideAllBut($views, 'entry-form');
 });
 
-// Show the previous view
+// Show the previous view at the end of the code
 hideAllBut($views, data.view);
