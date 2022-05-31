@@ -44,6 +44,10 @@ light-grey background: #f0f0f0
   padding: 0.1rem 0;
 }
 
+.padding-tb-1 {
+  padding: 1rem 0;
+}
+
 .no-text-deco {
   text-decoration: none;
 }

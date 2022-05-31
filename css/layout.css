@@ -34,6 +34,10 @@
   display: flex;
 }
 
+.inline {
+  display: inline;
+}
+
 label,
 button,
 img {
@@ -65,6 +69,15 @@ div.button-to-right {
 
 ul > li {
   margin: 1rem 0;
+}
+
+.horiz-nav > li {
+  display: inline;
+  margin-left: 20px;
+}
+
+.horiz-nav a {
+  text-decoration: none;
 }
 
 @media screen and (min-width: 768px) {
