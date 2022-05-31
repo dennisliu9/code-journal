@@ -1,0 +1,64 @@
+/*
+purple: #562b81
+light-grey background: #f0f0f0
+
+*/
+
+.bg-accent {
+  background-color: #562b81;
+}
+
+.bg-light {
+  background-color: #f0f0f0;
+}
+
+.text-white {
+  color: white;
+}
+
+.rounded-corners {
+  border-radius: 0.2rem;
+}
+
+.no-border {
+  border-style: none;
+}
+
+.heading-font {
+  font-family: "Proza Libre", sans-serif;
+}
+
+.body-font {
+  font-family: "Open Sans", sans-serif;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-normal {
+  font-weight: 400;
+}
+
+.padding-tb-01 {
+  padding: 0.1rem 0;
+}
+
+input,
+textarea {
+  border-style: solid;
+  border-color: lightgrey;
+  border-width: 1px;
+}
+
+input:focus,
+textarea:focus {
+  border: #562b81 solid;
+
+  /* Remove black outline */
+  outline: none;
+}
+
+button {
+  padding: 0.5rem 1.2rem;
+}

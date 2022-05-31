@@ -14,11 +14,57 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Proza+Libre:wght@400;700&display=swap"
+    rel="stylesheet">
 </head>
-<body>
-  <header>
+<body class="bg-light">
+  <header class="bg-accent text-white padding-tb-01">
+    <div class="container">
+      <div class="row">
+        <div class="column-full">
+          <h2 class="heading-font font-normal">Code Journal</h2>
+        </div>
+      </div>
+    </div>
   </header>
   <main>
+    <div class="container body-font font-bold">
+      <div data-view="entry-form">
+        <form id="entry-area">
+          <div class="row">
+            <div class="column-full">
+              <h1>New Entry</h1>
+            </div>
+          </div>
+          <div class="row">
+            <!-- row for image, title, photo url pieces-->
+            <div class="column-half flex-col justify-center">
+              <img id="input-img" src="images/placeholder-image-square.jpg" alt="placeholder image" class="rounded-corners">
+            </div>
+            <div class="column-half">
+              <label for="entry-title">Title</label>
+              <input required id="entry-title" name="entryTitle" type="text" class="rounded-corners">
+              <label for="photo-url">Photo URL</label>
+              <input required id="photo-url" name="photoURL" type="text" class="rounded-corners">
+            </div>
+          </div>
+          <div class="row">
+            <!-- Row for notes -->
+            <div class="column-full">
+              <label for="entry-notes">Notes</label>
+              <textarea required id="entry-notes" name="entryNotes" class="rounded-corners" rows="6"></textarea class="rounded-corners">
+            </div>
+          </div>
+          <div class="row">
+            <!-- Row for Save Button -->
+            <div class="column-full button-to-right">
+              <button id="save-button" class="bg-accent text-white rounded-corners no-border body-font">SAVE</button>
+            </div>
+          </div>
+        </form>
+      </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
