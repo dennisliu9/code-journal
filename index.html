@@ -26,7 +26,7 @@
         <div class="column-full">
           <h2 class="heading-font font-regular inline">Code Journal</h2>
           <ul class="body-font horiz-nav list-no-bullets inline">
-            <li><a href="#" class="text-white no-text-deco">Entries</a></li>
+            <li><a id="entries-nav" href="#" class="text-white no-text-deco">Entries</a></li>
           </ul>
         </div>
       </div>
@@ -34,7 +34,7 @@
   </header>
   <main>
     <div class="container body-font font-bold">
-      <div data-view="entry-form"> <!-- class="hidden" -->
+      <div data-view="entry-form">
         <form id="entry-area">
           <div class="row">
             <div class="column-full">
@@ -69,12 +69,12 @@
           </div>
         </form>
       </div>
-      <div data-view="entries">
+      <div data-view="entries" class="hidden">
         <div class="row">
           <div class="column-full flex-col justify-between align-center">
             <h1>Entries</h1>
             <div class="button-to-right">
-              <a href="#" class="bg-accent text-white rounded-corners no-border body-font button-padding no-text-deco">
+              <a id="new-entry-button" href="#" class="bg-accent text-white rounded-corners no-border body-font button-padding no-text-deco">
                 NEW
               </a>
             </div>

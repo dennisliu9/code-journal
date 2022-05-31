@@ -91,3 +91,28 @@ for (var entryIdx = 0; entryIdx < data.entries.length; entryIdx++) {
   var $entryTree = renderEntry(data.entries[entryIdx]);
   $entriesList.appendChild($entryTree);
 }
+
+// Toggle between entry form and entries
+var $views = document.querySelectorAll('div[data-view]');
+var $entriesNav = document.querySelector('#entries-nav');
+var $newEntry = document.querySelector('#new-entry-button');
+
+function hideAllBut(views, dataViewToShow) {
+  for (var vwIdx = 0; vwIdx < views.length; vwIdx++) {
+    if (views[vwIdx].getAttribute('data-view') !== dataViewToShow) {
+      views[vwIdx].className = 'hidden';
+    } else {
+      views[vwIdx].className = '';
+    }
+  }
+}
+
+$entriesNav.addEventListener('click', function (event) {
+  hideAllBut($views, 'entries');
+});
+
+$newEntry.addEventListener('click', function (event) {
+  hideAllBut($views, 'entry-form');
+});
+
+// figure out where to put for loop so that it runs when new data is submitted
