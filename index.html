@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Code Journal</title>
   <link rel="icon" href="images/favicon.ico">
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer" />
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Proza+Libre:wght@400;700&display=swap"
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Proza+Libre:wght@400;700&display=swap"
     rel="stylesheet">
 </head>
+
 <body class="bg-light">
   <header class="bg-accent text-white padding-tb-01">
     <div class="container">
       <div class="row">
         <div class="column-full">
-          <h2 class="heading-font font-normal">Code Journal</h2>
+          <h2 class="heading-font font-regular">Code Journal</h2>
         </div>
       </div>
     </div>
   </header>
   <main>
     <div class="container body-font font-bold">
-      <div data-view="entry-form">
+      <div data-view="entry-form" class="hidden">
         <form id="entry-area">
           <div class="row">
             <div class="column-full">
@@ -41,7 +41,8 @@
           <div class="row">
             <!-- row for image, title, photo url pieces-->
             <div class="column-half flex-col justify-center">
-              <img id="input-img" src="images/placeholder-image-square.jpg" alt="placeholder image" class="rounded-corners">
+              <img id="input-img" src="images/placeholder-image-square.jpg" alt="placeholder image"
+                class="rounded-corners">
             </div>
             <div class="column-half">
               <label for="entry-title">Title</label>
@@ -60,10 +61,71 @@
           <div class="row">
             <!-- Row for Save Button -->
             <div class="column-full button-to-right">
-              <button id="save-button" class="bg-accent text-white rounded-corners no-border body-font">SAVE</button>
+              <button id="save-button" class="bg-accent text-white rounded-corners no-border body-font button-padding">SAVE</button>
             </div>
           </div>
         </form>
+      </div>
+      <div data-view="entries">
+        <div class="row">
+          <!-- REPLACE INLINE STYLE -->
+          <div style="justify-content: space-between;" class="column-full flex-col">
+            <!-- MAKE JUSTIFY-CONTENT: SPACE-BETWEEN -->
+            <h1>Entries</h1>
+            <!-- ADJUST HEIGHT TO BE fit-content, or put it in an inline div with button-to-right -->
+            <a href="#" class="bg-accent text-white rounded-corners no-border body-font button-padding no-text-deco">NEW</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column-full">
+            <ul class="list-no-bullets">
+              <li>
+                <div class="row">
+                  <div class="column-half flex-col justify-center">
+                    <img src="https://www.syfy.com/sites/syfy/files/styles/blog_post_featured_media_tablet/public/2019/05/rev-1-pdp-fp-048_high_res_jpeg.jpeg?h=74397688">
+                  </div>
+                  <div class="column-half">
+                    <h2>Psyduck</h2>
+                    <p class="font-regular">
+                      Psyduck is just a regular guy trying to make it in the world. In that way, he isn't
+                      so different from you and me. Like any regular guy, he puts his pants on one leg at
+                      a time. Proverbial pants, of course. I'm not going to say he's the toughest dude out
+                      there because he's not. Does he complain about his headaches? Sure, sometimes. Would
+                      you if you had headaches all day? Probably.
+                      <br><br>
+                      Next time you see a Psyduck on the street, you don't need to salute him or shake his
+                      hand. He's not a hero, and he's not pretending to be one. Just greet him with a strong
+                      handhshake and look him in the eye when he's talking to you. He'll treat you in kind.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row">
+                  <div class="column-half flex-col justify-center">
+                    <img
+                      src="https://i.pinimg.com/736x/5c/17/aa/5c17aa712336ec66a892e290f4504a44.jpg">
+                  </div>
+                  <div class="column-half">
+                    <h2>Pikachu</h2>
+                    <p class="font-regular">
+                      Pikachu is a cold-blooded killer, a mercenary that never spent a paycheck on anything but
+                      more bullets nor a splinter of attention on anything but his next target. He has an elite
+                      martial arts training and his marksmanship with any weapon is unmatched. Having trained
+                      with SEAL Team Six, he can operate on both land and sea with full ability. His unique
+                      intelligence has allowed him to master the surfboard, making him the perfect agent to handle
+                      high profile targets who exclusively stay on beaches with moderate to perfect surfing conditions.
+                      <br><br>
+                      Pikachu has said that in another life, he would have enjoyed having a succulent garden in
+                      Orange County, California.
+                    </p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
       </div>
   </main>
   <script src="js/data.js"></script>

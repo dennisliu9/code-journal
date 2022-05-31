@@ -44,7 +44,7 @@ div[data-view="entry-form"] textarea {
   padding: 0.5rem;
 }
 
-div[data-view="entry-form"] img {
+img {
   max-width: 100%;
   min-height: 400px;
   object-fit: cover;
