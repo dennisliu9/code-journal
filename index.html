@@ -18,16 +18,24 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
 </head>
-<body class="main-font">
-  <header class="bg-purple text-white">
-    <h2>Code Journal</h2>
+<body class="main-font bg-light">
+  <header class="bg-accent text-white padding-tb-01">
+    <div class="container">
+      <div class="row">
+        <div class="column-full">
+          <h2>Code Journal</h2>
+        </div>
+      </div>
+    </div>
   </header>
   <main>
     <div class="container">
       <div data-view="entry-form">
         <form id="entry-area">
           <div class="row">
-            <h1>New Entry</h1>
+            <div class="column-full">
+              <h1>New Entry</h1>
+            </div>
           </div>
           <div class="row">
             <!-- row for image, title, photo url pieces-->
@@ -45,13 +53,13 @@
             <!-- Row for notes -->
             <div class="column-full">
               <label for="entry-notes">Notes</label>
-              <textarea required id="entry-notes" name="entryNotes" class="rounded-corners"></textarea class="rounded-corners">
+              <textarea required id="entry-notes" name="entryNotes" class="rounded-corners" rows="6"></textarea class="rounded-corners">
             </div>
           </div>
           <div class="row">
             <!-- Row for Save Button -->
             <div class="column-full button-to-right">
-              <button id="save-button" class="bg-purple text-white rounded-corners no-border">SAVE</button>
+              <button id="save-button" class="bg-accent text-white rounded-corners no-border main-font">SAVE</button>
             </div>
           </div>
         </form>

@@ -18,11 +18,22 @@
   width: 100%;
 }
 
+label,
+button,
+img {
+  margin: 1.5rem 0 0.5rem;
+}
+
 div[data-view="entry-form"] label,
 div[data-view="entry-form"] input,
 div[data-view="entry-form"] textarea {
   display: block;
   width: 100%;
+}
+
+div[data-view="entry-form"] input,
+div[data-view="entry-form"] textarea {
+  padding: 0.5rem;
 }
 
 div[data-view="entry-form"] img {

@@ -4,8 +4,12 @@ light-grey background: #f0f0f0
 
 */
 
-.bg-purple {
+.bg-accent {
   background-color: #562b81;
+}
+
+.bg-light {
+  background-color: #f0f0f0;
 }
 
 .text-white {
@@ -13,7 +17,7 @@ light-grey background: #f0f0f0
 }
 
 .rounded-corners {
-  border-radius: 0.4rem;
+  border-radius: 0.2rem;
 }
 
 .no-border {
@@ -24,10 +28,15 @@ light-grey background: #f0f0f0
   font-family: "Secular One", sans-serif;
 }
 
+.padding-tb-01 {
+  padding: 0.1rem 0;
+}
+
 input,
 textarea {
   border-style: solid;
   border-color: lightgrey;
+  border-width: 1px;
 }
 
 input:focus,
@@ -36,4 +45,8 @@ textarea:focus {
 
   /* Remove black outline */
   outline: none;
+}
+
+button {
+  padding: 0.5rem 1.2rem;
 }
