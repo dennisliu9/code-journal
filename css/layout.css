@@ -29,7 +29,7 @@ div[data-view="entry-form"] img {
   max-width: 100%;
 }
 
-div.submit-button {
+div.button-to-right {
   display: flex;
   justify-content: flex-end;
 }
