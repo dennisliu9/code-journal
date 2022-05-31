@@ -23,12 +23,16 @@ function saveFormData(event) {
   };
   data.entries.unshift(formData);
   data.nextEntryId++;
-
-  // reset
+  // reset form
   $photo.setAttribute('src', 'images/placeholder-image-square.jpg');
   $photo.setAttribute('alt', 'placeholder image');
   $form.reset();
 }
 
+function persistFormData(event) {
+  localStorage.setItem('code-journal-entry-data', JSON.stringify(data));
+}
+
 $photoURL.addEventListener('input', updatePhotoPreview);
 $form.addEventListener('submit', saveFormData);
+window.addEventListener('beforeunload', persistFormData);
