@@ -11,3 +11,8 @@ if (localStorage.getItem('code-journal-entry-data') === null) {
 } else {
   data = JSON.parse(localStorage.getItem('code-journal-entry-data'));
 }
+
+function persistFormData(event) {
+  localStorage.setItem('code-journal-entry-data', JSON.stringify(data));
+}
+window.addEventListener('beforeunload', persistFormData);
