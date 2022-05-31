@@ -24,8 +24,20 @@ light-grey background: #f0f0f0
   border-style: none;
 }
 
-.main-font {
-  font-family: "Secular One", sans-serif;
+.heading-font {
+  font-family: "Proza Libre", sans-serif;
+}
+
+.body-font {
+  font-family: "Open Sans", sans-serif;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-normal {
+  font-weight: 400;
 }
 
 .padding-tb-01 {
