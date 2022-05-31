@@ -20,6 +20,10 @@ light-grey background: #f0f0f0
   border-style: none;
 }
 
+.main-font {
+  font-family: "Secular One", sans-serif;
+}
+
 input,
 textarea {
   border-style: solid;
