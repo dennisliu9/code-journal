@@ -1,5 +1,6 @@
 /* global data */
 
+// Handle form
 var $form = document.querySelector('#entry-area');
 var $photo = document.querySelector('#input-img');
 var $photoURL = document.querySelector('#photo-url');
@@ -33,7 +34,9 @@ function saveFormData(event) {
 $photoURL.addEventListener('input', updatePhotoPreview);
 $form.addEventListener('submit', saveFormData);
 
-// render journal entries
+// Render journal entries
+var $entriesList = document.querySelector('#entries-list');
+
 function renderEntry(entryObj) {
   /* -- Sample Entry HTML --
   <li data-entry-id=[entryObj.entryId]>
@@ -82,4 +85,9 @@ function renderEntry(entryObj) {
   $entryLi.appendChild($entryRow);
 
   return $entryLi;
+}
+
+for (var entryIdx = 0; entryIdx < data.entries.length; entryIdx++) {
+  var $entryTree = renderEntry(data.entries[entryIdx]);
+  $entriesList.appendChild($entryTree);
 }
