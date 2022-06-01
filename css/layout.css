@@ -2,6 +2,10 @@
   display: none !important;
 }
 
+.invisible {
+  visibility: hidden;
+}
+
 .container {
   max-width: 575px;
   margin: 0 auto;
@@ -40,6 +44,13 @@
 
 .pos-rel {
   position: relative;
+}
+
+.flex-abs-center {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
 }
 
 label,
@@ -89,6 +100,17 @@ ul > li {
   top: 20px;
   right: 0;
   font-size: 1.5rem;
+}
+
+.modal-screen {
+  min-height: 100vh;
+  width: 100%;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-box {
+  background-color: white;
 }
 
 @media screen and (min-width: 768px) {

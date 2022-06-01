@@ -20,6 +20,23 @@
 </head>
 
 <body class="bg-light">
+  <div class="modal-screen flex-abs-center hidden">
+    <div class="modal-box rounded-corners">
+      <div class="container padding-tb-01">
+        <div class="row">
+          <div class="column-full">
+            <p class="body-font font-bold padding-tb-1">Are you sure you want to delete this entry?</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column-full flex-col justify-between">
+            <button id="del-modal-cancel" class="rounded-corners no-border body-font bg-passive text-dark-grey">CANCEL</button>
+            <button id="del-modal-confirm" class="rounded-corners no-border body-font bg-warning text-white">CONFIRM</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <header class="bg-accent text-white padding-tb-1">
     <div class="container">
       <div class="row">
@@ -63,12 +80,18 @@
           </div>
           <div class="row">
             <!-- Row for Save Button -->
-            <div class="column-full button-to-right">
-              <button id="save-button" class="bg-accent text-white rounded-corners no-border body-font button-padding">SAVE</button>
+            <div class="column-full flex-col justify-between align-center">
+              <button id="delete-entry-button" name="deleteEntryButton" class="link-style-button invisible">
+                Delete Entry
+              </button>
+              <button id="save-button" class="bg-accent text-white rounded-corners no-border body-font button-padding">
+                SAVE
+              </button>
             </div>
           </div>
         </form>
       </div>
+
       <div data-view="entries" class="hidden">
         <div class="row">
           <div class="column-full flex-col justify-between align-center">
@@ -83,31 +106,9 @@
         <div class="row">
           <div class="column-full">
             <ul id="entries-list" class="list-no-bullets">
-              <!-- <li data-entry-id="2">
-                <div class="row">
-                  <div class="column-half flex-col justify-center"><img src="https://wikimon.net/images/8/80/Agumon2.png"
-                      alt="User selected image"></div>
-                  <div class="column-half">
-                    <h2>Another Test</h2>
-                    <p class="font-regular">More placeholders</p>
-                  </div>
-                </div>
-              </li>
-              <li data-entry-id="1">
-                <div class="row">
-                  <div class="column-half flex-col justify-center"><img
-                      src="https://m.media-amazon.com/images/I/810PkyF-bgL._AC_SL1500_.jpg" alt="User selected image"></div>
-                  <div style="position: relative;" class="column-half">
-                    <h2>Test Tree</h2>
-                    <p class="font-regular">This will be used to test the edit button</p>
-                    <i style="position: absolute; top: 20px; right: 0px; font-size: 50px;" class="fa-solid fa-pen color-accent"></i>
-                  </div>
-                </div>
-              </li> -->
             </ul>
           </div>
         </div>
-
       </div>
   </main>
   <script src="js/data.js"></script>

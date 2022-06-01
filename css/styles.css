@@ -1,7 +1,9 @@
 /*
 purple: #562b81
 light-grey background: #f0f0f0
-
+red: #DC2626
+grey: #b6b6b6
+very dark grey: #292929
 */
 
 .bg-accent {
@@ -16,8 +18,20 @@ light-grey background: #f0f0f0
   background-color: #f0f0f0;
 }
 
+.bg-warning {
+  background-color: #dc2626;
+}
+
+.bg-passive {
+  background-color: #b6b6b6;
+}
+
 .text-white {
   color: white;
+}
+
+.text-dark-grey {
+  color: #292929;
 }
 
 .rounded-corners {
@@ -42,6 +56,10 @@ light-grey background: #f0f0f0
 
 .font-regular {
   font-weight: 400;
+}
+
+.font-16 {
+  font-size: 16px;
 }
 
 .padding-tb-01 {
@@ -78,7 +96,20 @@ textarea {
 input:focus,
 textarea:focus {
   border: #562b81 solid;
-
-  /* Remove black outline */
   outline: none;
+}
+
+.link-style-button {
+  color: #dc2626;
+  text-decoration: underline;
+  border: none;
+}
+
+.modal-box button {
+  padding: 0.5rem 0.6rem;
+  margin-top: 0;
+}
+
+button:hover {
+  cursor: pointer;
 }

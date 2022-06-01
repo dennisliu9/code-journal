@@ -24,6 +24,9 @@ function updatePhotoPreview(event) {
 function resetForm() {
   $form.reset();
   updatePhotoPreview(null);
+  if (!$form.elements.deleteEntryButton.classList.contains('invisible')) {
+    $form.elements.deleteEntryButton.classList.add('invisible');
+  }
 }
 
 function saveFormData(event) {
@@ -52,8 +55,6 @@ function saveFormData(event) {
 
   // reset form and image
   resetForm();
-  // reset editing status
-  data.editing = null;
   // show entries
   switchToView($views, 'entries');
 }
@@ -158,6 +159,7 @@ function switchToView(views, dataViewToShow) {
     }
   }
   if (dataViewToShow === 'entries') {
+    data.editing = null; // Whenever the view switches to entries, editing should be cleared
     var $entriesList = document.querySelector('#entries-list');
     $entriesList.replaceChildren();
     if (data.entries.length === 0) {
@@ -224,10 +226,45 @@ function handleEditClick(event) {
   $form.elements.entryNotes.value = data.editing.notes;
   updatePhotoPreview(null);
 
+  // reveal delete button
+  $form.elements.deleteEntryButton.classList.remove('invisible');
+
   switchToView($views, 'entry-form');
 }
 
 $entriesList.addEventListener('click', handleEditClick);
+
+// Delete Button and Delete Modal
+var $deleteButton = document.querySelector('#delete-entry-button');
+var $deleteModal = document.querySelector('.modal-screen');
+var $deleteModalCancel = document.querySelector('#del-modal-cancel');
+var $deleteModalConfirm = document.querySelector('#del-modal-confirm');
+
+function handleDeleteClick(event) {
+  // prevent 'submit' from triggering
+  event.preventDefault();
+  $deleteModal.classList.remove('hidden');
+}
+
+function handleModalCancel(event) {
+  $deleteModal.classList.add('hidden');
+}
+
+function handleModalConfirm(event) {
+  var removalEntryId = String(data.editing.entryId);
+  for (var dataEntriesIdx = 0; dataEntriesIdx < data.entries.length; dataEntriesIdx++) {
+    var currentEntryId = String(data.entries[dataEntriesIdx].entryId);
+    if (currentEntryId === removalEntryId) {
+      data.entries.splice(dataEntriesIdx, 1);
+    }
+  }
+  switchToView($views, 'entries');
+  $deleteModal.classList.add('hidden');
+}
+
+$deleteButton.addEventListener('click', handleDeleteClick);
+$deleteModalCancel.addEventListener('click', handleModalCancel);
+$deleteModalConfirm.addEventListener('click', handleModalConfirm);
 
 // Show the previous view at the end of the code
 switchToView($views, data.view);
