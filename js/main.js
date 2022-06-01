@@ -151,5 +151,16 @@ $newEntry.addEventListener('click', function (event) {
   switchToView($views, 'entry-form');
 });
 
+// Edit Button Capabilities
+var $entriesList = document.querySelector('#entries-list');
+function handleEditClick(event) {
+  // console.log('event.target.tagName', event.target.tagName);
+  if (event.target.tagName === 'I') {
+    switchToView($views, 'entry-form');
+  }
+}
+
+$entriesList.addEventListener('click', handleEditClick);
+
 // Show the previous view at the end of the code
 switchToView($views, data.view);
