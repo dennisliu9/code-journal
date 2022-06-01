@@ -153,11 +153,35 @@ $newEntry.addEventListener('click', function (event) {
 
 // Edit Button Capabilities
 var $entriesList = document.querySelector('#entries-list');
+
+/*
+Check if the clicked target is the icon by the tagName
+  If not, return (use a guard)
+Get the parent li element by querying for closest li with data-entry-id
+Get the parent's entry id to search the data object
+  Convert this (and the id in the data object) to a string to standardize types
+Loop through the data.entries array
+  If the current object data.entries has the same entry id as the clicked element
+    Set data.editing to that object
+
+[pre-populate the form]
+*/
 function handleEditClick(event) {
-  // console.log('event.target.tagName', event.target.tagName);
-  if (event.target.tagName === 'I') {
-    switchToView($views, 'entry-form');
+  // guard
+  if (event.target.tagName !== 'I') {
+    return;
   }
+  var $parentLi = event.target.closest('li[data-entry-id]');
+  var parentLiEntryId = $parentLi.getAttribute('data-entry-id');
+  parentLiEntryId = String(parentLiEntryId);
+  for (var dataEntriesIdx = 0; dataEntriesIdx < data.entries.length; dataEntriesIdx++) {
+    var currentEntryId = String(data.entries[dataEntriesIdx].entryId);
+    if (currentEntryId === parentLiEntryId) {
+      data.editing = data.entries[dataEntriesIdx];
+    }
+  }
+
+  switchToView($views, 'entry-form');
 }
 
 $entriesList.addEventListener('click', handleEditClick);
