@@ -52,11 +52,12 @@ function renderEntry(entryObj) {
       <div class="column-half flex-col justify-center">
         <img src=[entryObj.photoURL] alt="User selected image">
       </div>
-      <div class="column-half">
+      <div class="column-half pos-rel">
         <h2>[entryObj.title]</h2>
         <p class="font-regular">
           [entryObj.notes]
         </p>
+        <i class="fa-solid fa-pen color-accent edit-icon-pos"></i>
       </div>
     </div>
   </li>
@@ -71,7 +72,7 @@ function renderEntry(entryObj) {
   var $imgCol = document.createElement('div');
   $imgCol.className = 'column-half flex-col justify-center';
   var $txtCol = document.createElement('div');
-  $txtCol.className = 'column-half';
+  $txtCol.className = 'column-half pos-rel';
 
   var $entryPhoto = document.createElement('img');
   $entryPhoto.setAttribute('src', entryObj.photoURL);
@@ -82,9 +83,12 @@ function renderEntry(entryObj) {
   var $entryNotes = document.createElement('p');
   $entryNotes.textContent = entryObj.notes;
   $entryNotes.className = 'font-regular';
+  var $editIcon = document.createElement('i');
+  $editIcon.className = 'fa-solid fa-pen color-accent edit-icon-pos';
 
   $txtCol.appendChild($entryTitle);
   $txtCol.appendChild($entryNotes);
+  $txtCol.appendChild($editIcon);
   $imgCol.appendChild($entryPhoto);
 
   $entryRow.appendChild($imgCol);
@@ -125,7 +129,7 @@ function switchToView(views, dataViewToShow) {
   }
   if (dataViewToShow === 'entries') {
     var $entriesList = document.querySelector('#entries-list');
-    $entriesList.replaceChildren();
+    // $entriesList.replaceChildren();
     if (data.entries.length === 0) {
       var $blankEntriesText = document.createElement('p');
       $blankEntriesText.textContent = 'No entries have been recorded.';
