@@ -19,8 +19,20 @@ very dark grey: #292929
   background-color: #f0f0f0;
 }
 
+.bg-warning {
+  background-color: #dc2626;
+}
+
+.bg-passive {
+  background-color: #b6b6b6;
+}
+
 .text-white {
   color: white;
+}
+
+.text-dark-grey {
+  color: #292929;
 }
 
 .rounded-corners {
@@ -45,6 +57,10 @@ very dark grey: #292929
 
 .font-regular {
   font-weight: 400;
+}
+
+.font-16 {
+  font-size: 16px;
 }
 
 .padding-tb-01 {
@@ -93,5 +109,14 @@ textarea:focus {
 }
 
 .link-style-button:hover {
+  cursor: pointer;
+}
+
+.modal-box button {
+  padding: 0.5rem 0.6rem;
+  margin-top: 0;
+}
+
+button:hover {
   cursor: pointer;
 }

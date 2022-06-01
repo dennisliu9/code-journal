@@ -20,6 +20,23 @@
 </head>
 
 <body class="bg-light">
+  <div class="modal-screen flex-abs-center hidden">
+    <div class="modal-box rounded-corners">
+      <div class="container padding-tb-01">
+        <div class="row">
+          <div class="column-full">
+            <p class="body-font font-bold padding-tb-1">Are you sure you want to delete this entry?</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column-full flex-col justify-between">
+            <button id="del-modal-cancel" class="rounded-corners no-border body-font bg-passive text-dark-grey">CANCEL</button>
+            <button id="del-modal-confirm" class="rounded-corners no-border body-font bg-warning text-white">CONFIRM</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <header class="bg-accent text-white padding-tb-1">
     <div class="container">
       <div class="row">
@@ -74,6 +91,7 @@
           </div>
         </form>
       </div>
+
       <div data-view="entries" class="hidden">
         <div class="row">
           <div class="column-full flex-col justify-between align-center">

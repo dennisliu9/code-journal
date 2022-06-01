@@ -235,15 +235,29 @@ function handleEditClick(event) {
 
 $entriesList.addEventListener('click', handleEditClick);
 
-// Delete Button Capabilities
+// Delete Button and Delete Modal
 var $deleteButton = document.querySelector('#delete-entry-button');
+var $deleteModal = document.querySelector('.modal-screen');
+var $deleteModalCancel = document.querySelector('#del-modal-cancel');
+var $deleteModalConfirm = document.querySelector('#del-modal-confirm');
 
 function handleDeleteClick(event) {
-  // 'submit' is being registered because this is a button in the form too
-  // console.log('delete button clicked');
+  // prevent 'submit' from triggering
+  event.preventDefault();
+  $deleteModal.classList.remove('hidden');
+}
+
+function handleModalCancel(event) {
+  $deleteModal.classList.add('hidden');
+}
+
+function handleModalConfirm(event) {
+  $deleteModal.classList.add('hidden');
 }
 
 $deleteButton.addEventListener('click', handleDeleteClick);
+$deleteModalCancel.addEventListener('click', handleModalCancel);
+$deleteModalConfirm.addEventListener('click', handleModalConfirm);
 
 // Show the previous view at the end of the code
 switchToView($views, data.view);
