@@ -22,8 +22,20 @@
   justify-content: center;
 }
 
+.justify-between {
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}
+
 .flex-col {
   display: flex;
+}
+
+.inline {
+  display: inline;
 }
 
 label,
@@ -44,7 +56,7 @@ div[data-view="entry-form"] textarea {
   padding: 0.5rem;
 }
 
-div[data-view="entry-form"] img {
+img {
   max-width: 100%;
   min-height: 400px;
   object-fit: cover;
@@ -53,6 +65,19 @@ div[data-view="entry-form"] img {
 div.button-to-right {
   display: flex;
   justify-content: flex-end;
+}
+
+ul > li {
+  margin: 1rem 0;
+}
+
+.horiz-nav > li {
+  display: inline;
+  margin-left: 20px;
+}
+
+.horiz-nav a {
+  text-decoration: none;
 }
 
 @media screen and (min-width: 768px) {

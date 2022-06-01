@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Code Journal</title>
   <link rel="icon" href="images/favicon.ico">
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer" />
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Proza+Libre:wght@400;700&display=swap"
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Proza+Libre:wght@400;700&display=swap"
     rel="stylesheet">
 </head>
+
 <body class="bg-light">
-  <header class="bg-accent text-white padding-tb-01">
+  <header class="bg-accent text-white padding-tb-1">
     <div class="container">
       <div class="row">
         <div class="column-full">
-          <h2 class="heading-font font-normal">Code Journal</h2>
+          <h2 class="heading-font font-regular inline">Code Journal</h2>
+          <ul class="body-font horiz-nav inline">
+            <li><a id="entries-nav" href="#" class="text-white">Entries</a></li>
+          </ul>
         </div>
       </div>
     </div>
@@ -41,7 +44,8 @@
           <div class="row">
             <!-- row for image, title, photo url pieces-->
             <div class="column-half flex-col justify-center">
-              <img id="input-img" src="images/placeholder-image-square.jpg" alt="placeholder image" class="rounded-corners">
+              <img id="input-img" src="images/placeholder-image-square.jpg" alt="placeholder image"
+                class="rounded-corners">
             </div>
             <div class="column-half">
               <label for="entry-title">Title</label>
@@ -60,10 +64,29 @@
           <div class="row">
             <!-- Row for Save Button -->
             <div class="column-full button-to-right">
-              <button id="save-button" class="bg-accent text-white rounded-corners no-border body-font">SAVE</button>
+              <button id="save-button" class="bg-accent text-white rounded-corners no-border body-font button-padding">SAVE</button>
             </div>
           </div>
         </form>
+      </div>
+      <div data-view="entries" class="hidden">
+        <div class="row">
+          <div class="column-full flex-col justify-between align-center">
+            <h1>Entries</h1>
+            <div>
+              <a id="new-entry-button" href="#" class="bg-accent text-white rounded-corners body-font button-padding no-text-deco">
+                NEW
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column-full">
+            <ul id="entries-list" class="list-no-bullets">
+            </ul>
+          </div>
+        </div>
+
       </div>
   </main>
   <script src="js/data.js"></script>
