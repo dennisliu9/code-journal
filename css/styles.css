@@ -1,6 +1,9 @@
 /*
 purple: #562b81
 light-grey background: #f0f0f0
+red: #DC2626
+grey: #b6b6b6
+very dark grey: #292929
 
 */
 
@@ -81,4 +84,14 @@ textarea:focus {
 
   /* Remove black outline */
   outline: none;
+}
+
+.link-style-button {
+  color: #dc2626;
+  text-decoration: underline;
+  border: none;
+}
+
+.link-style-button:hover {
+  cursor: pointer;
 }

@@ -24,6 +24,9 @@ function updatePhotoPreview(event) {
 function resetForm() {
   $form.reset();
   updatePhotoPreview(null);
+  if (!$form.elements.deleteEntryButton.classList.contains('invisible')) {
+    $form.elements.deleteEntryButton.classList.add('invisible');
+  }
 }
 
 function saveFormData(event) {
@@ -224,10 +227,23 @@ function handleEditClick(event) {
   $form.elements.entryNotes.value = data.editing.notes;
   updatePhotoPreview(null);
 
+  // reveal delete button
+  $form.elements.deleteEntryButton.classList.remove('invisible');
+
   switchToView($views, 'entry-form');
 }
 
 $entriesList.addEventListener('click', handleEditClick);
+
+// Delete Button Capabilities
+var $deleteButton = document.querySelector('#delete-entry-button');
+
+function handleDeleteClick(event) {
+  // 'submit' is being registered because this is a button in the form too
+  // console.log('delete button clicked');
+}
+
+$deleteButton.addEventListener('click', handleDeleteClick);
 
 // Show the previous view at the end of the code
 switchToView($views, data.view);
