@@ -129,7 +129,7 @@ function switchToView(views, dataViewToShow) {
   }
   if (dataViewToShow === 'entries') {
     var $entriesList = document.querySelector('#entries-list');
-    // $entriesList.replaceChildren();
+    $entriesList.replaceChildren();
     if (data.entries.length === 0) {
       var $blankEntriesText = document.createElement('p');
       $blankEntriesText.textContent = 'No entries have been recorded.';
