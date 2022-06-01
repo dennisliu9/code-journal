@@ -55,8 +55,6 @@ function saveFormData(event) {
 
   // reset form and image
   resetForm();
-  // reset editing status
-  data.editing = null;
   // show entries
   switchToView($views, 'entries');
 }
@@ -161,6 +159,7 @@ function switchToView(views, dataViewToShow) {
     }
   }
   if (dataViewToShow === 'entries') {
+    data.editing = null; // Whenever the view switches to entries, editing should be cleared
     var $entriesList = document.querySelector('#entries-list');
     $entriesList.replaceChildren();
     if (data.entries.length === 0) {
@@ -252,6 +251,14 @@ function handleModalCancel(event) {
 }
 
 function handleModalConfirm(event) {
+  var removalEntryId = String(data.editing.entryId);
+  for (var dataEntriesIdx = 0; dataEntriesIdx < data.entries.length; dataEntriesIdx++) {
+    var currentEntryId = String(data.entries[dataEntriesIdx].entryId);
+    if (currentEntryId === removalEntryId) {
+      data.entries.splice(dataEntriesIdx, 1);
+    }
+  }
+  switchToView($views, 'entries');
   $deleteModal.classList.add('hidden');
 }
 
