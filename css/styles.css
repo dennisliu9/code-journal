@@ -8,6 +8,10 @@ light-grey background: #f0f0f0
   background-color: #562b81;
 }
 
+.color-accent {
+  color: #562b81;
+}
+
 .bg-light {
   background-color: #f0f0f0;
 }

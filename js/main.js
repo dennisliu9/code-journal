@@ -21,19 +21,39 @@ function updatePhotoPreview(event) {
   }
 }
 
-function saveFormData(event) {
-  event.preventDefault();
-  var formData = {
-    entryId: data.nextEntryId,
-    title: $form.elements.entryTitle.value,
-    photoURL: $form.elements.photoURL.value,
-    notes: $form.elements.entryNotes.value
-  };
-  data.entries.unshift(formData);
-  data.nextEntryId++;
-  // reset form and image
+function resetForm() {
   $form.reset();
   updatePhotoPreview(null);
+}
+
+function saveFormData(event) {
+  event.preventDefault();
+  var formData = {};
+
+  if (data.editing === null) {
+    formData = {
+      entryId: data.nextEntryId,
+      title: $form.elements.entryTitle.value,
+      photoURL: $form.elements.photoURL.value,
+      notes: $form.elements.entryNotes.value
+    };
+    data.entries.unshift(formData);
+    data.nextEntryId++;
+  } else {
+    formData = {
+      entryId: data.editing.entryId,
+      title: $form.elements.entryTitle.value,
+      photoURL: $form.elements.photoURL.value,
+      notes: $form.elements.entryNotes.value
+    };
+    var entriesUpdateIdx = data.entries.findIndex(obj => obj.entryId === formData.entryId);
+    data.entries[entriesUpdateIdx] = formData;
+  }
+
+  // reset form and image
+  resetForm();
+  // reset editing status
+  data.editing = null;
   // show entries
   switchToView($views, 'entries');
 }
@@ -52,11 +72,14 @@ function renderEntry(entryObj) {
       <div class="column-half flex-col justify-center">
         <img src=[entryObj.photoURL] alt="User selected image">
       </div>
-      <div class="column-half">
+      <div class="column-half pos-rel">
         <h2>[entryObj.title]</h2>
         <p class="font-regular">
           [entryObj.notes]
         </p>
+        <a href="#" class="no-text-deco">
+          <i class="fa-solid fa-pen color-accent edit-icon-pos"></i>
+        </a>
       </div>
     </div>
   </li>
@@ -71,7 +94,7 @@ function renderEntry(entryObj) {
   var $imgCol = document.createElement('div');
   $imgCol.className = 'column-half flex-col justify-center';
   var $txtCol = document.createElement('div');
-  $txtCol.className = 'column-half';
+  $txtCol.className = 'column-half pos-rel';
 
   var $entryPhoto = document.createElement('img');
   $entryPhoto.setAttribute('src', entryObj.photoURL);
@@ -83,8 +106,18 @@ function renderEntry(entryObj) {
   $entryNotes.textContent = entryObj.notes;
   $entryNotes.className = 'font-regular';
 
+  var $editIconWrapper = document.createElement('a');
+  $editIconWrapper.setAttribute('href', '#');
+  $editIconWrapper.className = 'no-text-deco';
+
+  var $editIcon = document.createElement('i');
+  $editIcon.className = 'fa-solid fa-pen color-accent edit-icon-pos';
+
+  $editIconWrapper.appendChild($editIcon);
+
   $txtCol.appendChild($entryTitle);
   $txtCol.appendChild($entryNotes);
+  $txtCol.appendChild($editIconWrapper);
   $imgCol.appendChild($entryPhoto);
 
   $entryRow.appendChild($imgCol);
@@ -97,6 +130,7 @@ function renderEntry(entryObj) {
 
 /*
 switchToView - general function to hide views except desired one
+TODO: In the future, split the entries rendering into another function
 
 Provided a array of nodes of the data views and a string with the data view to show
 Loop through array
@@ -144,8 +178,56 @@ $entriesNav.addEventListener('click', function (event) {
   switchToView($views, 'entries');
 });
 $newEntry.addEventListener('click', function (event) {
+  resetForm();
   switchToView($views, 'entry-form');
 });
+
+// Edit Button Capabilities
+var $entriesList = document.querySelector('#entries-list');
+
+/*
+handleEditClick - behavior when an edit icon is clicked
+
+Check if the clicked target is the icon by the tagName
+  If not, return (use a guard)
+Get the parent li element by querying for closest li with data-entry-id
+Get the parent's entry id to search the data object
+  Convert this (and the id in the data object) to a string to standardize types
+Loop through the data.entries array
+  If the current object data.entries has the same entry id as the clicked element
+    Set data.editing to that object
+
+[pre-populate the form]
+Reset the photo preview
+Switch view to entry form
+*/
+function handleEditClick(event) {
+  // guard
+  if (event.target.tagName !== 'I') {
+    return;
+  }
+
+  var $parentLi = event.target.closest('li[data-entry-id]');
+  var parentLiEntryId = $parentLi.getAttribute('data-entry-id');
+  parentLiEntryId = String(parentLiEntryId);
+
+  for (var dataEntriesIdx = 0; dataEntriesIdx < data.entries.length; dataEntriesIdx++) {
+    var currentEntryId = String(data.entries[dataEntriesIdx].entryId);
+    if (currentEntryId === parentLiEntryId) {
+      data.editing = data.entries[dataEntriesIdx];
+    }
+  }
+
+  // pre-populate form
+  $form.elements.entryTitle.value = data.editing.title;
+  $form.elements.photoURL.value = data.editing.photoURL;
+  $form.elements.entryNotes.value = data.editing.notes;
+  updatePhotoPreview(null);
+
+  switchToView($views, 'entry-form');
+}
+
+$entriesList.addEventListener('click', handleEditClick);
 
 // Show the previous view at the end of the code
 switchToView($views, data.view);
