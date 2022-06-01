@@ -28,16 +28,32 @@ function resetForm() {
 
 function saveFormData(event) {
   event.preventDefault();
-  var formData = {
-    entryId: data.nextEntryId,
-    title: $form.elements.entryTitle.value,
-    photoURL: $form.elements.photoURL.value,
-    notes: $form.elements.entryNotes.value
-  };
-  data.entries.unshift(formData);
-  data.nextEntryId++;
+  var formData = {};
+
+  if (data.editing === null) {
+    formData = {
+      entryId: data.nextEntryId,
+      title: $form.elements.entryTitle.value,
+      photoURL: $form.elements.photoURL.value,
+      notes: $form.elements.entryNotes.value
+    };
+    data.entries.unshift(formData);
+    data.nextEntryId++;
+  } else {
+    formData = {
+      entryId: data.editing.entryId,
+      title: $form.elements.entryTitle.value,
+      photoURL: $form.elements.photoURL.value,
+      notes: $form.elements.entryNotes.value
+    };
+    var entriesUpdateIdx = data.entries.findIndex(obj => obj.entryId === formData.entryId);
+    data.entries[entriesUpdateIdx] = formData;
+  }
+
   // reset form and image
   resetForm();
+  // reset editing status
+  data.editing = null;
   // show entries
   switchToView($views, 'entries');
 }
@@ -114,6 +130,7 @@ function renderEntry(entryObj) {
 
 /*
 switchToView - general function to hide views except desired one
+TODO: In the future, split the entries rendering into another function
 
 Provided a array of nodes of the data views and a string with the data view to show
 Loop through array
@@ -169,6 +186,8 @@ $newEntry.addEventListener('click', function (event) {
 var $entriesList = document.querySelector('#entries-list');
 
 /*
+handleEditClick - behavior when an edit icon is clicked
+
 Check if the clicked target is the icon by the tagName
   If not, return (use a guard)
 Get the parent li element by querying for closest li with data-entry-id
@@ -179,6 +198,8 @@ Loop through the data.entries array
     Set data.editing to that object
 
 [pre-populate the form]
+Reset the photo preview
+Switch view to entry form
 */
 function handleEditClick(event) {
   // guard
@@ -198,20 +219,10 @@ function handleEditClick(event) {
   }
 
   // pre-populate form
-  for (var formIdx = 0; formIdx < $form.elements.length; formIdx++) {
-    var currentFormElId = $form.elements[formIdx].getAttribute('id');
-    if (currentFormElId === 'entry-title') {
-      $form.elements[formIdx].value = data.editing.title;
-    } else if (currentFormElId === 'photo-url') {
-      $form.elements[formIdx].value = data.editing.photoURL;
-      updatePhotoPreview(null);
-    } else if (currentFormElId === 'entry-notes') {
-      $form.elements[formIdx].value = data.editing.notes;
-    }
-  }
-
-  // Update things: if something is in data.editing, it's an update
-  // if you click new, it should be a new entry (reset form)
+  $form.elements.entryTitle.value = data.editing.title;
+  $form.elements.photoURL.value = data.editing.photoURL;
+  $form.elements.entryNotes.value = data.editing.notes;
+  updatePhotoPreview(null);
 
   switchToView($views, 'entry-form');
 }
@@ -220,12 +231,3 @@ $entriesList.addEventListener('click', handleEditClick);
 
 // Show the previous view at the end of the code
 switchToView($views, data.view);
-
-/*
-To conditionally add new or update:
-  Check if data.editing is null
-    If not, update on submit
-    Else, add new on submit
-    (apply these to DOM tree as well)
-  Set data.editing to null when done
-*/
