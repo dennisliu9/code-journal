@@ -35,7 +35,7 @@ function saveFormData(event) {
   $form.reset();
   updatePhotoPreview(null);
   // show entries
-  hideAllBut($views, 'entries');
+  switchToView($views, 'entries');
 }
 
 $photoURL.addEventListener('input', updatePhotoPreview);
@@ -96,7 +96,7 @@ function renderEntry(entryObj) {
 }
 
 /*
-hideAllBut - general function to hide views except desired one
+switchToView - general function to hide views except desired one
 
 Provided a array of nodes of the data views and a string with the data view to show
 Loop through array
@@ -115,7 +115,7 @@ If dataViewToShow === 'entries', we will want to render the entries tree again
 Update the data object with the now current view
 (This function should be called at the end of the 'submit' event listener)
 */
-function hideAllBut(views, dataViewToShow) {
+function switchToView(views, dataViewToShow) {
   for (var vwIdx = 0; vwIdx < views.length; vwIdx++) {
     if (views[vwIdx].getAttribute('data-view') !== dataViewToShow) {
       views[vwIdx].className = 'hidden';
@@ -141,11 +141,11 @@ function hideAllBut(views, dataViewToShow) {
 }
 
 $entriesNav.addEventListener('click', function (event) {
-  hideAllBut($views, 'entries');
+  switchToView($views, 'entries');
 });
 $newEntry.addEventListener('click', function (event) {
-  hideAllBut($views, 'entry-form');
+  switchToView($views, 'entry-form');
 });
 
 // Show the previous view at the end of the code
-hideAllBut($views, data.view);
+switchToView($views, data.view);
