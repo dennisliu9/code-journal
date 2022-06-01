@@ -21,6 +21,11 @@ function updatePhotoPreview(event) {
   }
 }
 
+function resetForm() {
+  $form.reset();
+  updatePhotoPreview(null);
+}
+
 function saveFormData(event) {
   event.preventDefault();
   var formData = {
@@ -32,8 +37,7 @@ function saveFormData(event) {
   data.entries.unshift(formData);
   data.nextEntryId++;
   // reset form and image
-  $form.reset();
-  updatePhotoPreview(null);
+  resetForm();
   // show entries
   switchToView($views, 'entries');
 }
@@ -157,6 +161,7 @@ $entriesNav.addEventListener('click', function (event) {
   switchToView($views, 'entries');
 });
 $newEntry.addEventListener('click', function (event) {
+  resetForm();
   switchToView($views, 'entry-form');
 });
 
