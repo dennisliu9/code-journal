@@ -57,7 +57,9 @@ function renderEntry(entryObj) {
         <p class="font-regular">
           [entryObj.notes]
         </p>
-        <i class="fa-solid fa-pen color-accent edit-icon-pos"></i>
+        <a href="#" class="no-text-deco">
+          <i class="fa-solid fa-pen color-accent edit-icon-pos"></i>
+        </a>
       </div>
     </div>
   </li>
@@ -83,12 +85,19 @@ function renderEntry(entryObj) {
   var $entryNotes = document.createElement('p');
   $entryNotes.textContent = entryObj.notes;
   $entryNotes.className = 'font-regular';
+
+  var $editIconWrapper = document.createElement('a');
+  $editIconWrapper.setAttribute('href', '#');
+  $editIconWrapper.className = 'no-text-deco';
+
   var $editIcon = document.createElement('i');
   $editIcon.className = 'fa-solid fa-pen color-accent edit-icon-pos';
 
+  $editIconWrapper.appendChild($editIcon);
+
   $txtCol.appendChild($entryTitle);
   $txtCol.appendChild($entryNotes);
-  $txtCol.appendChild($editIcon);
+  $txtCol.appendChild($editIconWrapper);
   $imgCol.appendChild($entryPhoto);
 
   $entryRow.appendChild($imgCol);
@@ -171,15 +180,33 @@ function handleEditClick(event) {
   if (event.target.tagName !== 'I') {
     return;
   }
+
   var $parentLi = event.target.closest('li[data-entry-id]');
   var parentLiEntryId = $parentLi.getAttribute('data-entry-id');
   parentLiEntryId = String(parentLiEntryId);
+
   for (var dataEntriesIdx = 0; dataEntriesIdx < data.entries.length; dataEntriesIdx++) {
     var currentEntryId = String(data.entries[dataEntriesIdx].entryId);
     if (currentEntryId === parentLiEntryId) {
       data.editing = data.entries[dataEntriesIdx];
     }
   }
+
+  // pre-populate form
+  for (var formIdx = 0; formIdx < $form.elements.length; formIdx++) {
+    var currentFormElId = $form.elements[formIdx].getAttribute('id');
+    if (currentFormElId === 'entry-title') {
+      $form.elements[formIdx].value = data.editing.title;
+    } else if (currentFormElId === 'photo-url') {
+      $form.elements[formIdx].value = data.editing.photoURL;
+      updatePhotoPreview(null);
+    } else if (currentFormElId === 'entry-notes') {
+      $form.elements[formIdx].value = data.editing.notes;
+    }
+  }
+
+  // Update things: if something is in data.editing, it's an update
+  // if you click new, it should be a new entry (reset form)
 
   switchToView($views, 'entry-form');
 }
@@ -188,3 +215,12 @@ $entriesList.addEventListener('click', handleEditClick);
 
 // Show the previous view at the end of the code
 switchToView($views, data.view);
+
+/*
+To conditionally add new or update:
+  Check if data.editing is null
+    If not, update on submit
+    Else, add new on submit
+    (apply these to DOM tree as well)
+  Set data.editing to null when done
+*/
