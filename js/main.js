@@ -9,6 +9,7 @@ var $photoURL = document.querySelector('#photo-url');
 //    delete modal
 var $deleteModal = document.querySelector('.modal-screen');
 // event listener targets
+var $logoNav = document.querySelector('#logo-nav');
 var $entriesNav = document.querySelector('#entries-nav');
 var $newEntry = document.querySelector('#new-entry-button');
 var $deleteButton = document.querySelector('#delete-entry-button');
@@ -279,6 +280,9 @@ renderAllEntriesOnto(data.entries, $entriesList);
 $photoURL.addEventListener('input', updatePhotoPreview);
 $form.addEventListener('submit', saveFormData);
 
+$logoNav.addEventListener('click', function (event) {
+  switchToView(event.target.getAttribute('data-view'));
+});
 $entriesNav.addEventListener('click', function (event) {
   switchToView(event.target.getAttribute('data-view'));
 });

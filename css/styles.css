@@ -110,6 +110,7 @@ textarea:focus {
   margin-top: 0;
 }
 
-button:hover {
+button:hover,
+#logo-nav:hover {
   cursor: pointer;
 }
