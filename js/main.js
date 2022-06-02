@@ -288,21 +288,9 @@ function handleModalConfirm(event) {
   // delete from data
   var entriesRemovalIdx = data.entries.findIndex(obj => obj.entryId === removalEntryId);
   data.entries.splice(entriesRemovalIdx, 1);
-  // for (var dataEntriesIdx = 0; dataEntriesIdx < data.entries.length; dataEntriesIdx++) {
-  //   var currentEntryId = String(data.entries[dataEntriesIdx].entryId);
-  //   if (currentEntryId === removalEntryId) {
-  //     data.entries.splice(dataEntriesIdx, 1);
-  //   }
-  // }
   // delete from DOM tree
-  // for (var childIdx = 0; childIdx < $entriesList.children.length; childIdx++) {
-  //   var $currentChild = $entriesList.children[childIdx];
-  //   if ($currentChild.getAttribute('data-entry-id') === removalEntryId) {
-  //     $currentChild.remove();
-  //   }
-  // }
-  var $elToDelete = $entriesList.querySelector('[data-entry-id="' + removalEntryId + '"]');
-  $elToDelete.remove();
+  var $elToRemove = $entriesList.querySelector('[data-entry-id="' + removalEntryId + '"]');
+  $elToRemove.remove();
 
   switchToView(event.target.getAttribute('data-view'));
   $deleteModal.classList.add('hidden');
