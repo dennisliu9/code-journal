@@ -6,7 +6,7 @@ var $photo = document.querySelector('#input-img');
 var $photoURL = document.querySelector('#photo-url');
 
 // DOM elements to toggle between entry form and entries
-var $views = document.querySelectorAll('div[data-view]');
+// var $views = document.querySelectorAll('.view');
 var $entriesNav = document.querySelector('#entries-nav');
 var $newEntry = document.querySelector('#new-entry-button');
 
@@ -56,7 +56,7 @@ function saveFormData(event) {
   // reset form and image
   resetForm();
   // show entries
-  switchToView($views, 'entries');
+  switchToView('entries');
 }
 
 $photoURL.addEventListener('input', updatePhotoPreview);
@@ -110,6 +110,7 @@ function renderEntry(entryObj) {
   var $editIconWrapper = document.createElement('a');
   $editIconWrapper.setAttribute('href', '#');
   $editIconWrapper.className = 'no-text-deco';
+  $editIconWrapper.setAttribute('data-view', 'entry-form');
 
   var $editIcon = document.createElement('i');
   $editIcon.className = 'fa-solid fa-pen color-accent edit-icon-pos';
@@ -150,14 +151,16 @@ If dataViewToShow === 'entries', we will want to render the entries tree again
 Update the data object with the now current view
 (This function should be called at the end of the 'submit' event listener)
 */
-function switchToView(views, dataViewToShow) {
-  for (var vwIdx = 0; vwIdx < views.length; vwIdx++) {
-    if (views[vwIdx].getAttribute('data-view') !== dataViewToShow) {
-      views[vwIdx].className = 'hidden';
+function switchToView(dataViewToShow) {
+  var $views = document.querySelectorAll('.view');
+  for (var vwIdx = 0; vwIdx < $views.length; vwIdx++) {
+    if ($views[vwIdx].getAttribute('data-view') !== dataViewToShow) {
+      $views[vwIdx].className = 'view hidden';
     } else {
-      views[vwIdx].className = '';
+      $views[vwIdx].className = 'view';
     }
   }
+  // separate functionality (rendering, not switching)
   if (dataViewToShow === 'entries') {
     data.editing = null; // Whenever the view switches to entries, editing should be cleared
     var $entriesList = document.querySelector('#entries-list');
@@ -173,15 +176,16 @@ function switchToView(views, dataViewToShow) {
       $entriesList.appendChild($entryTree);
     }
   }
+  // end separate functionality
   data.view = dataViewToShow;
 }
 
 $entriesNav.addEventListener('click', function (event) {
-  switchToView($views, 'entries');
+  switchToView(event.target.getAttribute('data-view'));
 });
 $newEntry.addEventListener('click', function (event) {
   resetForm();
-  switchToView($views, 'entry-form');
+  switchToView(event.target.getAttribute('data-view'));
 });
 
 // Edit Button Capabilities
@@ -229,7 +233,9 @@ function handleEditClick(event) {
   // reveal delete button
   $form.elements.deleteEntryButton.classList.remove('invisible');
 
-  switchToView($views, 'entry-form');
+  // find data-view on containing <a> and use to swap
+  var $dataViewHolder = event.target.closest('[data-view]');
+  switchToView($dataViewHolder.getAttribute('data-view'));
 }
 
 $entriesList.addEventListener('click', handleEditClick);
@@ -241,8 +247,6 @@ var $deleteModalCancel = document.querySelector('#del-modal-cancel');
 var $deleteModalConfirm = document.querySelector('#del-modal-confirm');
 
 function handleDeleteClick(event) {
-  // prevent 'submit' from triggering
-  event.preventDefault();
   $deleteModal.classList.remove('hidden');
 }
 
@@ -258,7 +262,7 @@ function handleModalConfirm(event) {
       data.entries.splice(dataEntriesIdx, 1);
     }
   }
-  switchToView($views, 'entries');
+  switchToView(event.target.getAttribute('data-view'));
   $deleteModal.classList.add('hidden');
 }
 
@@ -267,4 +271,4 @@ $deleteModalCancel.addEventListener('click', handleModalCancel);
 $deleteModalConfirm.addEventListener('click', handleModalConfirm);
 
 // Show the previous view at the end of the code
-switchToView($views, data.view);
+switchToView(data.view);
