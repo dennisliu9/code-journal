@@ -1,68 +1,8 @@
 /* global data */
 
-// DOM elements to handle form
-var $form = document.querySelector('#entry-area');
-var $photo = document.querySelector('#input-img');
-var $photoURL = document.querySelector('#photo-url');
-
-// DOM elements to toggle between entry form and entries
-// var $views = document.querySelectorAll('.view');
-var $entriesNav = document.querySelector('#entries-nav');
-var $newEntry = document.querySelector('#new-entry-button');
-
-// Handle form (functions and event listeners)
-function updatePhotoPreview(event) {
-  if ($photoURL.value !== '') {
-    $photo.setAttribute('src', $photoURL.value);
-    $photo.setAttribute('alt', 'User selected image');
-  } else {
-    $photo.setAttribute('src', 'images/placeholder-image-square.jpg');
-    $photo.setAttribute('alt', 'placeholder image');
-  }
-}
-
-function resetForm() {
-  $form.reset();
-  updatePhotoPreview(null);
-  if (!$form.elements.deleteEntryButton.classList.contains('invisible')) {
-    $form.elements.deleteEntryButton.classList.add('invisible');
-  }
-}
-
-function saveFormData(event) {
-  event.preventDefault();
-  var formData = {};
-
-  if (data.editing === null) {
-    formData = {
-      entryId: data.nextEntryId,
-      title: $form.elements.entryTitle.value,
-      photoURL: $form.elements.photoURL.value,
-      notes: $form.elements.entryNotes.value
-    };
-    data.entries.unshift(formData);
-    data.nextEntryId++;
-  } else {
-    formData = {
-      entryId: data.editing.entryId,
-      title: $form.elements.entryTitle.value,
-      photoURL: $form.elements.photoURL.value,
-      notes: $form.elements.entryNotes.value
-    };
-    var entriesUpdateIdx = data.entries.findIndex(obj => obj.entryId === formData.entryId);
-    data.entries[entriesUpdateIdx] = formData;
-  }
-
-  // reset form and image
-  resetForm();
-  // show entries
-  switchToView('entries');
-}
-
-$photoURL.addEventListener('input', updatePhotoPreview);
-$form.addEventListener('submit', saveFormData);
-
 // Render Entries (functions and event listeners)
+
+var $entriesList = document.querySelector('#entries-list');
 
 // Render journal entries according to sample HTML, get data from entryObj
 function renderEntry(entryObj) {
@@ -131,8 +71,111 @@ function renderEntry(entryObj) {
 }
 
 /*
+renderAllEntries - Renders all entries from data.entries as a DOM tree
+This should only return the tree to be appended!
+??? Can I insert things next to? Or not? How should I best build this up
+
+If there are no entries in data.entries
+  Create a p element saying No Entries have been recorded
+Otherwise, if there are entries in data.entries
+  Loop through the entries
+    Call renderEntry() on each
+*/
+function renderAllEntriesOnto(arrayOfChildren, parent) {
+  if (arrayOfChildren.length !== 0) {
+    for (var entryIdx = 0; entryIdx < arrayOfChildren.length; entryIdx++) {
+      var $entryTree = renderEntry(arrayOfChildren[entryIdx]);
+      parent.appendChild($entryTree);
+    }
+  } else {
+    var $blankEntriesText = document.createElement('p');
+    $blankEntriesText.textContent = 'No entries have been recorded.';
+    $blankEntriesText.className = 'body-font font-regular text-center';
+    parent.appendChild($blankEntriesText);
+  }
+}
+
+// Render all data for the first time
+renderAllEntriesOnto(data.entries, $entriesList);
+
+// DOM elements to handle form
+var $form = document.querySelector('#entry-area');
+var $photo = document.querySelector('#input-img');
+var $photoURL = document.querySelector('#photo-url');
+
+// DOM elements to toggle between entry form and entries
+// var $views = document.querySelectorAll('.view');
+var $entriesNav = document.querySelector('#entries-nav');
+var $newEntry = document.querySelector('#new-entry-button');
+
+// Handle form (functions and event listeners)
+function updatePhotoPreview(event) {
+  if ($photoURL.value !== '') {
+    $photo.setAttribute('src', $photoURL.value);
+    $photo.setAttribute('alt', 'User selected image');
+  } else {
+    $photo.setAttribute('src', 'images/placeholder-image-square.jpg');
+    $photo.setAttribute('alt', 'placeholder image');
+  }
+}
+
+function resetForm() {
+  $form.reset();
+  updatePhotoPreview(null);
+  if (!$form.elements.deleteEntryButton.classList.contains('invisible')) {
+    $form.elements.deleteEntryButton.classList.add('invisible');
+  }
+}
+
+function saveFormData(event) {
+  event.preventDefault();
+  var formData = {};
+
+  if (data.editing === null) {
+    formData = {
+      entryId: data.nextEntryId,
+      title: $form.elements.entryTitle.value,
+      photoURL: $form.elements.photoURL.value,
+      notes: $form.elements.entryNotes.value
+    };
+    // save data
+    data.entries.unshift(formData);
+    data.nextEntryId++;
+    // add DOM tree
+    $entriesList.prepend(renderEntry(formData));
+  } else {
+    formData = {
+      entryId: data.editing.entryId,
+      title: $form.elements.entryTitle.value,
+      photoURL: $form.elements.photoURL.value,
+      notes: $form.elements.entryNotes.value
+    };
+    // save data
+    var entriesUpdateIdx = data.entries.findIndex(obj => obj.entryId === formData.entryId);
+    data.entries[entriesUpdateIdx] = formData;
+    // replace DOM tree
+    // for (var childIdx = 0; childIdx < $entriesList.children.length; childIdx++) {
+    //   var $currentChild = $entriesList.children[childIdx];
+    //   var currentEntryId = String($currentChild.getAttribute('data-entry-id'));
+    //   if (currentEntryId === String(data.editing.entryId)) {
+    //     $currentChild.replaceWith(renderEntry(data.entries[entriesUpdateIdx]));
+    //   }
+    // }
+    var $elToReplace = $entriesList.querySelector('[data-entry-id="' + data.editing.entryId + '"]');
+    $elToReplace.replaceWith(renderEntry(data.entries[entriesUpdateIdx]));
+  }
+
+  // reset form and image
+  resetForm();
+  // show entries
+  switchToView('entries');
+}
+
+$photoURL.addEventListener('input', updatePhotoPreview);
+$form.addEventListener('submit', saveFormData);
+
+/*
 switchToView - general function to hide views except desired one
-TODO: In the future, split the entries rendering into another function
 
 Provided a array of nodes of the data views and a string with the data view to show
 Loop through array
@@ -160,23 +203,9 @@ function switchToView(dataViewToShow) {
       $views[vwIdx].className = 'view';
     }
   }
-  // separate functionality (rendering, not switching)
   if (dataViewToShow === 'entries') {
     data.editing = null; // Whenever the view switches to entries, editing should be cleared
-    var $entriesList = document.querySelector('#entries-list');
-    $entriesList.replaceChildren();
-    if (data.entries.length === 0) {
-      var $blankEntriesText = document.createElement('p');
-      $blankEntriesText.textContent = 'No entries have been recorded.';
-      $blankEntriesText.className = 'body-font font-regular text-center';
-      $entriesList.appendChild($blankEntriesText);
-    }
-    for (var entryIdx = 0; entryIdx < data.entries.length; entryIdx++) {
-      var $entryTree = renderEntry(data.entries[entryIdx]);
-      $entriesList.appendChild($entryTree);
-    }
   }
-  // end separate functionality
   data.view = dataViewToShow;
 }
 
@@ -189,7 +218,7 @@ $newEntry.addEventListener('click', function (event) {
 });
 
 // Edit Button Capabilities
-var $entriesList = document.querySelector('#entries-list');
+// var $entriesList = document.querySelector('#entries-list');
 
 /*
 handleEditClick - behavior when an edit icon is clicked
@@ -255,13 +284,26 @@ function handleModalCancel(event) {
 }
 
 function handleModalConfirm(event) {
-  var removalEntryId = String(data.editing.entryId);
-  for (var dataEntriesIdx = 0; dataEntriesIdx < data.entries.length; dataEntriesIdx++) {
-    var currentEntryId = String(data.entries[dataEntriesIdx].entryId);
-    if (currentEntryId === removalEntryId) {
-      data.entries.splice(dataEntriesIdx, 1);
-    }
-  }
+  var removalEntryId = data.editing.entryId; // number type
+  // delete from data
+  var entriesRemovalIdx = data.entries.findIndex(obj => obj.entryId === removalEntryId);
+  data.entries.splice(entriesRemovalIdx, 1);
+  // for (var dataEntriesIdx = 0; dataEntriesIdx < data.entries.length; dataEntriesIdx++) {
+  //   var currentEntryId = String(data.entries[dataEntriesIdx].entryId);
+  //   if (currentEntryId === removalEntryId) {
+  //     data.entries.splice(dataEntriesIdx, 1);
+  //   }
+  // }
+  // delete from DOM tree
+  // for (var childIdx = 0; childIdx < $entriesList.children.length; childIdx++) {
+  //   var $currentChild = $entriesList.children[childIdx];
+  //   if ($currentChild.getAttribute('data-entry-id') === removalEntryId) {
+  //     $currentChild.remove();
+  //   }
+  // }
+  var $elToDelete = $entriesList.querySelector('[data-entry-id="' + removalEntryId + '"]');
+  $elToDelete.remove();
+
   switchToView(event.target.getAttribute('data-view'));
   $deleteModal.classList.add('hidden');
 }
