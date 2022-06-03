@@ -105,6 +105,16 @@ textarea:focus {
   border: none;
 }
 
+.modal-screen {
+  background-color: rgba(0, 0, 0, 0.7);
+  transform: scale(0);
+  transition: transform ease-in 0.1s;
+}
+
+.modal-screen-transition {
+  transform: scale(1);
+}
+
 .modal-box button {
   padding: 0.5rem 0.6rem;
   margin-top: 0;

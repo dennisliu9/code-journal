@@ -251,11 +251,22 @@ function handleEditClick(event) {
 
 // Delete Button and Delete Modal
 function handleDeleteClick(event) {
+  // Animating modal from hidden
+  // https://cloudfour.com/thinks/transitioning-hidden-elements/
   $deleteModal.classList.remove('hidden');
+  // force a reflow so the modal is redrawn before transitioning
+  var forceReflow = $deleteModal.offsetHeight;
+  $deleteModal.classList.add('modal-screen-transition');
 }
 
 function handleModalCancel(event) {
-  $deleteModal.classList.add('hidden');
+  function dummyListener() {
+    // this is run when the transition finishes, hiding and removing the event listener
+    $deleteModal.classList.add('hidden');
+    $deleteModal.removeEventListener('transitionend', dummyListener);
+  }
+  $deleteModal.addEventListener('transitionend', dummyListener);
+  $deleteModal.classList.remove('modal-screen-transition');
 }
 
 function handleModalConfirm(event) {
@@ -268,6 +279,7 @@ function handleModalConfirm(event) {
   $elToRemove.remove();
 
   switchToView(event.target.getAttribute('data-view'));
+  $deleteModal.classList.remove('modal-screen-transition');
   $deleteModal.classList.add('hidden');
 }
 
