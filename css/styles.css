@@ -6,32 +6,62 @@ grey: #b6b6b6
 very dark grey: #292929
 */
 
+.light {
+  --main-accent-color: #562b81;
+  --contrast-accent-color: #562b81;
+  --main-bg-color: #f0f0f0;
+  --warning-color: #dc2626;
+  --passive-color: #b6b6b6;
+  --contrast-text-color: #fff;
+  --passive-contrast-text-color: #292929;
+}
+
+.dark {
+  --main-accent-color: #432b5c;
+  --contrast-accent-color: #854ac0;
+  --main-bg-color: rgb(27, 27, 27);
+  --warning-color: #dc2626;
+  --passive-color: #b6b6b6;
+  --contrast-text-color: rgb(255, 250, 208);
+  --passive-contrast-text-color: #292929;
+}
+
+html.dark img {
+  filter: brightness(0.8);
+}
+
+html.dark h1,
+html.dark h2,
+html.dark p {
+  color: var(--contrast-text-color);
+}
+
 .bg-accent {
-  background-color: #562b81;
+  background-color: var(--main-accent-color);
 }
 
 .color-accent {
-  color: #562b81;
+  color: var(--contrast-accent-color);
 }
 
 .bg-light {
-  background-color: #f0f0f0;
+  background-color: var(--main-bg-color);
 }
 
 .bg-warning {
-  background-color: #dc2626;
+  background-color: var(--warning-color);
 }
 
 .bg-passive {
-  background-color: #b6b6b6;
+  background-color: var(--passive-color);
 }
 
 .text-white {
-  color: white;
+  color: var(--contrast-text-color);
 }
 
 .text-dark-grey {
-  color: #292929;
+  color: var(--passive-contrast-text-color);
 }
 
 .rounded-corners {
@@ -95,12 +125,12 @@ textarea {
 
 input:focus,
 textarea:focus {
-  border: #562b81 solid;
+  border: var(--main-accent-color) solid;
   outline: none;
 }
 
 .link-style-button {
-  color: #dc2626;
+  color: var(--warning-color);
   text-decoration: underline;
   border: none;
 }
@@ -121,6 +151,7 @@ textarea:focus {
 }
 
 button:hover,
-#logo-nav:hover {
+#logo-nav:hover,
+#dark-mode-toggle:hover {
   cursor: pointer;
 }

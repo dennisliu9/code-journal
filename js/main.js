@@ -15,6 +15,7 @@ var $newEntry = document.querySelector('#new-entry-button');
 var $deleteButton = document.querySelector('#delete-entry-button');
 var $deleteModalCancel = document.querySelector('#del-modal-cancel');
 var $deleteModalConfirm = document.querySelector('#del-modal-confirm');
+var $darkModeToggle = document.querySelector('#dark-mode-toggle');
 
 // Render Entries
 function renderEntry(entryObj) {
@@ -283,6 +284,17 @@ function handleModalConfirm(event) {
   $deleteModal.classList.add('hidden');
 }
 
+function toggleDarkMode(event) {
+  var $html = document.querySelector('html');
+  if ($html.classList.contains('dark')) {
+    $html.classList.remove('dark');
+    $html.classList.add('light');
+  } else {
+    $html.classList.remove('light');
+    $html.classList.add('dark');
+  }
+}
+
 // Finish definitions
 
 // Render all data for the first time
@@ -308,6 +320,8 @@ $entriesList.addEventListener('click', handleEditClick);
 $deleteButton.addEventListener('click', handleDeleteClick);
 $deleteModalCancel.addEventListener('click', handleModalCancel);
 $deleteModalConfirm.addEventListener('click', handleModalConfirm);
+
+$darkModeToggle.addEventListener('click', toggleDarkMode);
 
 // Show the last view
 switchToView(data.view);
