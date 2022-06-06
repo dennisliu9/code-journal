@@ -36,6 +36,25 @@ html.dark p {
   color: var(--contrast-text-color);
 }
 
+#dark-mode-toggle {
+  transition: text-shadow 250ms 200ms ease-in;
+}
+
+button:hover,
+#logo-nav:hover,
+#dark-mode-toggle:hover {
+  cursor: pointer;
+}
+
+#dark-mode-toggle.dark-mode-on-light {
+  text-shadow:
+    rgb(255, 237, 89) 0 0 12px,
+    rgb(255, 237, 89) 0 0 18px,
+    rgb(255, 237, 89) 0 0 25px;
+  transition-delay: 0s;
+  transition-timing-function: ease-out;
+}
+
 .bg-accent {
   background-color: var(--main-accent-color);
 }
@@ -148,10 +167,4 @@ textarea:focus {
 .modal-box button {
   padding: 0.5rem 0.6rem;
   margin-top: 0;
-}
-
-button:hover,
-#logo-nav:hover,
-#dark-mode-toggle:hover {
-  cursor: pointer;
 }

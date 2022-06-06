@@ -286,12 +286,31 @@ function handleModalConfirm(event) {
 
 function toggleDarkMode(event) {
   var $html = document.querySelector('html');
-  if ($html.classList.contains('dark')) {
-    $html.classList.remove('dark');
-    $html.classList.add('light');
-  } else {
+  var $toggleDiv = event.target.closest('div#dark-mode-toggle');
+  var $toggleIcon = $toggleDiv.querySelector('i');
+  var $toggleText = $toggleDiv.querySelector('p');
+  var faLightIcon = 'fa-regular fa-sun';
+  var faDarkIcon = 'fa-solid fa-moon';
+
+  if ($html.classList.contains('light')) {
+    // light to dark
     $html.classList.remove('light');
     $html.classList.add('dark');
+    $toggleIcon.className = faDarkIcon;
+    // $toggleIcon.classList.remove(faLightIcon);
+    // $toggleIcon.classList.add(faDarkIcon);
+    $toggleText.textContent = '\u00A0\u00A0Dark Mode'; // \u00A0 is &nbsp; for DOM
+    // flash light on Dark Mode toggle
+    $toggleDiv.classList.add('dark-mode-on-light');
+    $toggleDiv.addEventListener('transitionend',
+      event => event.target.classList.remove('dark-mode-on-light')
+    );
+  } else {
+    // dark to light
+    $html.classList.remove('dark');
+    $html.classList.add('light');
+    $toggleIcon.className = faLightIcon;
+    $toggleText.textContent = '\u00A0\u00A0Light Mode';
   }
 }
 
